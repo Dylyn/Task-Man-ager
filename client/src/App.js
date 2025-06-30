@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import './App.css';
+
+import Todos from './components/Todos'
 
 function App() {
 
@@ -24,8 +27,11 @@ function App() {
         <p key={i}>{user}</p>
       ))
     )}
-
+      <div className="App">
+        <Todos />
+      </div>
     </div>
+    
   )
 }
 
