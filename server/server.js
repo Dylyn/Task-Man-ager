@@ -1,22 +1,24 @@
-const express = require('express')
-const cors = require('cors')
-const { db, initDatabase } = require('./db')
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const { db } = require('./migrations/db');
 
-const app = express()
+const app = express();
 
 // Middleware
-app.use(cors()) // Enable CORS for all routes
-app.use(express.json()) // Parse JSON request bodies
+app.use(cors()); // Enable CORS\
+app.use(helmet()); 
+app.use(express.json()); // Parse JSON request bodies
 
 // Initialize database when server starts
-initDatabase()
+//initDatabase();
 
 // REST API Endpoints
 
 // GET /tasks - List all tasks
 app.get('/tasks', async (req, res) => {
   try {
-    const tasks = await db('tasks').select('*').orderBy('created_at', 'desc')
+    const tasks = await db('tasks').select('*')
     res.json(tasks)
   } catch (error) {
     console.error('Error fetching tasks:', error)
@@ -109,13 +111,14 @@ app.delete('/tasks/:id', async (req, res) => {
   }
 })
 
-// Keep the original test endpoint for compatibility
+// test endpoint
 app.get("/api", (req, res) => {
     res.json({ "users": ["userOne", "userTwo", "userThree"] })
 })
 
+const HOST = 'localhost';
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`)
+  console.log(`Server started at ${HOST} on port ${PORT}`)
 })
 
