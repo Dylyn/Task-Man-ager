@@ -1,5 +1,9 @@
-task manager application
+# Task Manager App
 
-front end built with react
+A simple full-stack task management tool that allows users to add, edit, and delete tasks. Tasks are stored in a database and updated in real time through a RESTful API. The app supports inline editing and dynamic rendering of task lists.
 
-backend built with nodejs and expressjs
+## Technologies Used
+
+- **Frontend:** React, Axios
+- **Backend:** Node.js, Express
+- **Database:** SQLite with Knex.js
