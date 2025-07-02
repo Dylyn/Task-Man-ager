@@ -1,0 +1,235 @@
+ /* App container */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: #f7f7f7;
+  padding: 2rem;
+}
+
+/* Todo input form */
+form {
+  margin-bottom: 2rem;
+}
+
+input[name="todo"] {
+  font-size: 1.2rem;
+  padding: 0.75rem;
+  width: 80%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-right: 1rem;
+}
+
+button[type="submit"] {
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  background: #ffeb3b;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 1px 1px 4px #ccc;
+  transition: background 0.2s;
+}
+button[type="submit"]:hover {
+  background: #ffe066;
+}
+
+/* Sticky note style for tasks */
+.sticky-notes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.sticky-note {
+  position: relative;
+  background: #fff;
+  border: 1.5px solid #222;
+  border-radius: 12px;
+  box-shadow: 2px 4px 12px #e0e0e0;
+  width: 100%;
+  min-height: 140px;
+  padding: 1.2rem 1rem 2.2rem 1.2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: box-shadow 0.2s;
+  box-sizing: border-box;
+}
+.sticky-note:hover {
+  box-shadow: 4px 8px 20px #e0e0e0;
+}
+
+.sticky-note-title {
+  font-weight: bold;
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+.sticky-note-description {
+  font-size: 1.02rem;
+  margin-bottom: 0.7rem;
+  color: #333;
+}
+
+.sticky-note-delete {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #d84315;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.sticky-note-edit-btn {
+  background: #f3f3f3;
+  border: none;
+  border-radius: 6px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #795548;
+  cursor: pointer;
+  margin-bottom: 0.7rem;
+  transition: background 0.2s;
+}
+.sticky-note-edit-btn:hover {
+  background: #e0e0e0;
+}
+
+.sticky-note-edit-form {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.sticky-note-edit-input {
+  font-size: 1.1rem;
+  padding: 0.3rem;
+  width: 80%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.sticky-note-edit-save {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #222;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sticky-note-meta-boxes {
+  position: absolute;
+  left: 1.2rem;
+  bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+.sticky-note-status-box, .sticky-note-priority-box {
+  display: inline-block;
+  min-width: 56px;
+  padding: 0.18rem 0.7rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: 7px;
+  color: #fff;
+  text-align: center;
+  text-transform: capitalize;
+  box-shadow: 1px 2px 6px #e0e0e0;
+}
+
+/* Status colors */
+.status-pending {
+  background: #ff8a80;
+}
+.status-inprogress {
+  background: #ffb74d;
+}
+.status-complete {
+  background: #66bb6a;
+}
+
+/* Priority colors */
+.priority-low {
+  background: #ffb3b3;
+}
+.priority-medium {
+  background: #ff5252;
+}
+.priority-high {
+  background: #d50000;
+}
+
+/* Kanban board layout */
+.kanban-columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.kanban-column {
+  min-width: 260px;
+  max-width: 280px;
+  min-height: 300px;
+  border-radius: 12px;
+  box-shadow: 2px 4px 12px #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-bottom: 1rem;
+  transition: box-shadow 0.2s;
+}
+
+.kanban-bg-white {
+  background: #fff;
+}
+.kanban-bg-grey {
+  background: #f3f3f3;
+}
+
+.kanban-header {
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 0.7rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.7rem;
+  letter-spacing: 1px;
+  color: #fff;
+}
+.kanban-header-design {
+  background: #ffb74d;
+}
+.kanban-header-development {
+  background: #64b5f6;
+}
+.kanban-header-testing {
+  background: #81c784;
+}
+.kanban-header-release {
+  background: #ba68c8;
+}
+
+.kanban-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

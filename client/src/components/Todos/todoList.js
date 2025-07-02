@@ -1,14 +1,43 @@
 import React from 'react';
 import Todo from './todo';
 
-function TodoList({ todos, deleteHandler,  updateHandler}) {
-    return (
-        <div>
-            {todos.map(todo => {
-                return <Todo key={todo.id} todo={todo} deleteHandler={deleteHandler} updateHandler={updateHandler}/>
-            })}
+const COLUMN_CONFIG = [
+  { key: 'design', label: 'Design', headerColor: 'kanban-header-design' },
+  { key: 'development', label: 'Development', headerColor: 'kanban-header-development' },
+  { key: 'testing', label: 'Testing', headerColor: 'kanban-header-testing' },
+  { key: 'release', label: 'Release', headerColor: 'kanban-header-release' },
+];
+
+function TodoList({ todos, deleteHandler, updateHandler }) {
+  // For now, put all tasks in the first (Design) column
+  const columns = [todos, [], [], []];
+
+  return (
+    <div className="kanban-columns">
+      {COLUMN_CONFIG.map((col, idx) => (
+        <div
+          key={col.key}
+          className={`kanban-column ${idx % 2 === 0 ? 'kanban-bg-white' : 'kanban-bg-grey'}`}
+        >
+          <div
+            className={`kanban-header ${col.headerColor}`}
+          >
+            {col.label}
+          </div>
+          <div className="kanban-tasks">
+            {columns[idx].map(todo => (
+              <Todo
+                key={todo.id}
+                todo={todo}
+                deleteHandler={deleteHandler}
+                updateHandler={updateHandler}
+              />
+            ))}
+          </div>
         </div>
-    )
-};
+      ))}
+    </div>
+  );
+}
 
 export default TodoList;

@@ -32,12 +32,13 @@ function TodoForm({ todos, setTodos }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            < input 
+            <input 
                 type="text"
                 name="todo"
                 value={todo.title}
-                placeholder="enter item"
+                placeholder="Add new task"
                 onChange={handleChange}
+                style={{ fontSize: '1.2rem', padding: '0.75rem', width: '80%' }}
             />
             <button type='submit'>add task</button>
         </form>

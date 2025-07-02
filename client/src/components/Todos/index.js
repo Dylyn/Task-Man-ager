@@ -35,7 +35,7 @@ function Todos() {
         .then(response => {
             console.log(response)
             setTodoList(todoList.map(item => item.id === todo.id ? response.data : item))
-        })
+        }) 
         .catch(error => {
             console.log(error)
         })
