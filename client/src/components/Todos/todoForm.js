@@ -6,28 +6,32 @@ function TodoForm({ todos, setTodos }) {
     const initialState = {
         title:'',
         id:'',
+        status:'design',
+        description: '',
+        assignee: '',
+        priority: '',
     }
 
     const [todo, setTodo] = useState(initialState);
 
     const handleChange = e => {
         setTodo({
+            ...todo,
             title: e.target.value,
-            id: Date.now()  
+            id: Date.now()
         })
     }
 
     const handleSubmit = e => {
-        e.preventDefault()
-        setTodos([ todo, ...todos ])
+        e.preventDefault();
         axios.post('http://localhost:5000/tasks', todo)
         .then(response => {
-            console.log(response)
+            setTodos([ response.data, ...todos ]);
+            setTodo(initialState);
         })
         .catch(error => {
             console.log(error)
         })
-        setTodo(initialState)
     }
 
     return (

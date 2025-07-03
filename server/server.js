@@ -52,7 +52,7 @@ app.post('/tasks', async (req, res) => {
     const [newTask] = await db('tasks').insert({
       title,
       description,
-      status: status || 'pending',
+      status: status || 'Design',
       priority: priority || 'medium',
       assignee
     }).returning('*')

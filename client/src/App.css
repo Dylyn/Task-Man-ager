@@ -52,7 +52,9 @@ button[type="submit"]:hover {
   border: 1.5px solid #222;
   border-radius: 12px;
   box-shadow: 2px 4px 12px #e0e0e0;
-  width: 100%;
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
   min-height: 140px;
   padding: 1.2rem 1rem 2.2rem 1.2rem;
   margin-bottom: 1rem;
@@ -90,8 +92,13 @@ button[type="submit"]:hover {
   cursor: pointer;
   z-index: 2;
 }
-
-.sticky-note-edit-btn {
+.sticky-note-btn-section {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+.sticky-note-btn {
   background: #f3f3f3;
   border: none;
   border-radius: 6px;
@@ -103,7 +110,7 @@ button[type="submit"]:hover {
   margin-bottom: 0.7rem;
   transition: background 0.2s;
 }
-.sticky-note-edit-btn:hover {
+.sticky-note-btn:hover {
   background: #e0e0e0;
 }
 
@@ -139,17 +146,24 @@ button[type="submit"]:hover {
   gap: 0.5rem;
   align-items: flex-end;
 }
-.sticky-note-status-box, .sticky-note-priority-box {
+.sticky-note-status-box, .sticky-note-priority-box, .sticky-note-assignee-box {
   display: inline-block;
   min-width: 56px;
+  max-width: 120px;
   padding: 0.18rem 0.7rem;
-  font-size: 0.92rem;
+  font-size: clamp(0.7rem, 2vw, 0.92rem);
   font-weight: 600;
   border-radius: 7px;
   color: #fff;
   text-align: center;
   text-transform: capitalize;
   box-shadow: 1px 2px 6px #e0e0e0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sticky-note-assignee-box {
+  color: #000;
 }
 
 /* Status colors */
@@ -232,4 +246,110 @@ button[type="submit"]:hover {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.sticky-note-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.18);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sticky-note-modal {
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 14px;
+  box-shadow: 0 4px 32px #0002;
+  padding: 2rem 2.2rem 1.5rem 2.2rem;
+  min-width: 320px;
+  max-width: 95vw;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.sticky-note-modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+  color: #222;
+  text-align: center;
+}
+.sticky-note-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.sticky-note-modal-form label {
+  font-size: 1rem;
+  color: #222;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.sticky-note-modal-input {
+  font-size: 1.05rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 7px;
+  border: 1.2px solid #bbb;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  background: #fff;
+  color: #222;
+  resize: none;
+}
+.sticky-note-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
+}
+.sticky-note-modal-save {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.45rem 1.2rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sticky-note-modal-save:hover {
+  background: #444;
+}
+.sticky-note-modal-cancel {
+  background: #fff;
+  color: #222;
+  border: 1.2px solid #222;
+  border-radius: 7px;
+  padding: 0.45rem 1.2rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.sticky-note-modal-cancel:hover {
+  background: #f3f3f3;
+  color: #d84315;
+  border-color: #d84315;
+}
+
+.sticky-note-modal-delete {
+  background: #ff6868;
+  color: #222;
+  border: 1.2px solid #222;
+  border-radius: 7px;
+  padding: 0.45rem 1.2rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sticky-note-modal-delete:hover {
+  background: #d83434;
 }

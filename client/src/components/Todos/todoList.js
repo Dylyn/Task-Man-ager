@@ -9,8 +9,10 @@ const COLUMN_CONFIG = [
 ];
 
 function TodoList({ todos, deleteHandler, updateHandler }) {
-  // For now, put all tasks in the first (Design) column
-  const columns = [todos, [], [], []];
+  // Group todos by status (case-insensitive)
+  const columns = COLUMN_CONFIG.map(col =>
+    todos.filter(todo => (todo.status || '').toLowerCase() === col.key)
+  );
 
   return (
     <div className="kanban-columns">
