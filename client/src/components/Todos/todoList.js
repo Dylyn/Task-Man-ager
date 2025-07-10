@@ -19,7 +19,7 @@ function TodoList({ todos, deleteHandler, updateHandler }) {
       {COLUMN_CONFIG.map((col, idx) => (
         <div
           key={col.key}
-          className={`kanban-column ${idx % 2 === 0 ? 'kanban-bg-white' : 'kanban-bg-grey'}`}
+          className={`kanban-column ${'kanban-bg-white'}`}
         >
           <div
             className={`kanban-header ${col.headerColor}`}

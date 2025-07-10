@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import TodoForm from './todoForm';
 import TodoList from './todoList';
+import AddTaskButton from './addTaskButton';
 import axios from 'axios';
-
 
 function Todos() {
     const [todoList, setTodoList] = useState([]);
@@ -41,9 +40,19 @@ function Todos() {
         })
     }
 
+    const addTaskHandler = (newTask) => {
+        axios.post('http://localhost:5000/tasks', newTask)
+        .then(response => {
+            setTodoList([response.data, ...todoList]);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
     return (
-        <div>
-            <TodoForm todos={todoList} setTodos={setTodoList}/>
+        <div className="todos-container">
+            <AddTaskButton onAddTask={addTaskHandler} />
             <TodoList todos={todoList} deleteHandler={deleteHandler} updateHandler={updateHandler} />
         </div>
     )

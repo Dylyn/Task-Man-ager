@@ -42,6 +42,7 @@ function TodoForm({ todos, setTodos }) {
                 value={todo.title}
                 placeholder="Add new task"
                 onChange={handleChange}
+                maxLength={100}
                 style={{ fontSize: '1.2rem', padding: '0.75rem', width: '80%' }}
             />
             <button type='submit'>add task</button>

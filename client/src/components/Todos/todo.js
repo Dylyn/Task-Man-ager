@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 function Todo({ todo, deleteHandler, updateHandler }) {
     const [isEditing, setIsEditing] = useState(false);
+    const [isViewing, setIsViewing] = useState(false);
     const [editFields, setEditFields] = useState({
         title: todo.title || '',
         description: todo.description || '',
@@ -9,6 +10,9 @@ function Todo({ todo, deleteHandler, updateHandler }) {
         status: todo.status || '',
         priority: todo.priority || '',
     });
+
+    const handleView = () => setIsViewing(true);
+    const handleViewCancel = () => setIsViewing(false);
 
     const handleEdit = () => setIsEditing(true);
     const handleEditChange = (e) => {
@@ -22,15 +26,6 @@ function Todo({ todo, deleteHandler, updateHandler }) {
     };
     const handleEditCancel = () => setIsEditing(false);
 
-    // Helper for status and priority color classes
-    const getStatusClass = (status) => {
-        switch ((status || '').toLowerCase()) {
-            case 'pending': return 'status-pending';
-            case 'in progress': return 'status-inprogress';
-            case 'complete': return 'status-complete';
-            default: return '';
-        }
-    };
     const getPriorityClass = (priority) => {
         switch ((priority || '').toLowerCase()) {
             case 'low': return 'priority-low';
@@ -42,6 +37,53 @@ function Todo({ todo, deleteHandler, updateHandler }) {
 
     return (
         <div className="sticky-note">
+
+            {isViewing && (
+                <div className="sticky-note-modal-overlay">
+                    <div className="sticky-note-modal">
+                        <div className="sticky-note-modal-title">View Task</div>
+                        <div className="sticky-note-modal-form">
+                            <div className="sticky-note-view-field">
+                                <div className="sticky-note-view-value-title">{todo.title}</div>
+                            </div>
+                            <div className="sticky-note-view-row">
+                                <div className="sticky-note-view-field">
+                                    <label>Assignee</label>
+                                    <div className="sticky-note-view-value">{todo.assignee || 'Unassigned'}</div>
+                                </div>
+                                <div className="sticky-note-view-field">
+                                    <label>Status</label>
+                                    <div className="sticky-note-view-value">{todo.status || 'Not set'}</div>
+                                </div>
+                                <div className="sticky-note-view-field">
+                                    <label>Priority</label>
+                                    <span className={`sticky-note-priority-box ${getPriorityClass(todo.priority)}`}>{todo.priority}</span>
+                                </div>
+                                <div className="sticky-note-view-field">
+                                    <label>Task ID</label>
+                                    <div className="sticky-note-view-value">{todo.id}</div>
+                                </div>
+                            </div>
+                            
+                            <div className="sticky-note-view-field">
+                                <label>Description</label>
+                                <div className="sticky-note-view-value">{todo.description || 'No description provided'}</div>
+                            </div>
+                            <div className="sticky-note-view-field">
+                                <label>Attachments</label>
+                                <div className="sticky-note-attachments-section">
+                                    <div className="sticky-note-attachments-placeholder">No attachments</div>
+                                    <button type="button" className="sticky-note-attachment-btn">Add Attachment</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="sticky-note-modal-actions">
+                            <button type="button" className="sticky-note-modal-cancel" onClick={handleViewCancel}>Back</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+             
             {isEditing && (
                 <div className="sticky-note-modal-overlay">
                     <div className="sticky-note-modal">
@@ -55,6 +97,7 @@ function Todo({ todo, deleteHandler, updateHandler }) {
                                     value={editFields.title}
                                     onChange={handleEditChange}
                                     className="sticky-note-modal-input"
+                                    maxLength={100}
                                     required
                                 />
                             </label>
@@ -65,7 +108,8 @@ function Todo({ todo, deleteHandler, updateHandler }) {
                                     value={editFields.description}
                                     onChange={handleEditChange}
                                     className="sticky-note-modal-input"
-                                    rows={2}
+                                    rows={10}
+                                    maxLength={750}
                                 />
                             </label>
                             <label>
@@ -116,12 +160,11 @@ function Todo({ todo, deleteHandler, updateHandler }) {
                 </div>
             )}
 
-            {/* Normal view */}
-            {!isEditing && <>
+            {!isEditing && !isViewing && <>
                 <div className="sticky-note-title">{todo.title}</div>
                 <div className="sticky-note-btn-section">
                     <button
-                        //onClick={handleView}
+                        onClick={handleView}
                         className="sticky-note-btn"
                         style={{ width: '75%' }}
                     >

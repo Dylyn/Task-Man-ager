@@ -1,4 +1,4 @@
- /* App container */
+/* App container */
 .App {
   display: flex;
   flex-direction: column;
@@ -6,6 +6,56 @@
   min-height: 100vh;
   background: #f7f7f7;
   padding: 2rem;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #222;
+  margin: 0 0 0.5rem 0;
+}
+
+.app-subtitle {
+  font-size: 1rem;
+  color: #666;
+  opacity: 0.7;
+  margin: 0;
+  font-style: italic;
+}
+
+.todos-container {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.add-task-button {
+  position: sticky;
+  top: 2rem;
+  background: #ffeb3b;
+  color: #333;
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 4px 12px #ccc;
+  transition: all 0.2s;
+  min-width: 200px;
+  height: fit-content;
+}
+
+.add-task-button:hover {
+  background: #ffe066;
+  box-shadow: 4px 8px 20px #ccc;
+  transform: translateY(-2px);
 }
 
 /* Todo input form */
@@ -73,11 +123,19 @@ button[type="submit"]:hover {
   font-size: 1.15rem;
   margin-bottom: 0.5rem;
   color: #222;
+  max-height: 75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sticky-note-description {
   font-size: 1.02rem;
   margin-bottom: 0.7rem;
   color: #333;
+  max-height: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 1.4;
 }
 
 .sticky-note-delete {
@@ -166,23 +224,12 @@ button[type="submit"]:hover {
   color: #000;
 }
 
-/* Status colors */
-.status-pending {
-  background: #ff8a80;
-}
-.status-inprogress {
-  background: #ffb74d;
-}
-.status-complete {
-  background: #66bb6a;
-}
-
 /* Priority colors */
 .priority-low {
-  background: #ffb3b3;
+  background: #ebcc43;
 }
 .priority-medium {
-  background: #ff5252;
+  background: #e78e3a;
 }
 .priority-high {
   background: #d50000;
@@ -192,7 +239,7 @@ button[type="submit"]:hover {
 .kanban-columns {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
   justify-content: center;
   width: 100%;
   margin-top: 2rem;
@@ -214,9 +261,6 @@ button[type="submit"]:hover {
 
 .kanban-bg-white {
   background: #fff;
-}
-.kanban-bg-grey {
-  background: #f3f3f3;
 }
 
 .kanban-header {
@@ -263,16 +307,16 @@ button[type="submit"]:hover {
   border-radius: 14px;
   box-shadow: 0 4px 32px #0002;
   padding: 2rem 2.2rem 1.5rem 2.2rem;
-  min-width: 320px;
-  max-width: 95vw;
+  min-width: 720px;
+  max-width: 50vw;
   min-height: 200px;
+  max-height: 90vw;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 .sticky-note-modal-title {
   font-size: 1.25rem;
-  font-weight: bold;
   margin-bottom: 1.2rem;
   color: #222;
   text-align: center;
@@ -323,6 +367,7 @@ button[type="submit"]:hover {
 }
 .sticky-note-modal-cancel {
   background: #fff;
+  box-shadow: 1px 1px 4px #ccc;
   color: #222;
   border: 1.2px solid #222;
   border-radius: 7px;
@@ -333,15 +378,16 @@ button[type="submit"]:hover {
   transition: background 0.2s, color 0.2s;
 }
 .sticky-note-modal-cancel:hover {
-  background: #f3f3f3;
-  color: #d84315;
-  border-color: #d84315;
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffd902;
 }
 
 .sticky-note-modal-delete {
   background: #ff6868;
+  box-shadow: 1px 1px 4px #ccc;
   color: #222;
-  border: 1.2px solid #222;
+  border: none;
   border-radius: 7px;
   padding: 0.45rem 1.2rem;
   font-size: 1.05rem;
@@ -351,5 +397,83 @@ button[type="submit"]:hover {
 }
 
 .sticky-note-modal-delete:hover {
-  background: #d83434;
+  background: #ff5252;
+}
+
+.sticky-note-view-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.8rem;
+}
+.sticky-note-view-field label {
+  font-size: 1rem;
+  color: #222;
+  font-weight: 500;
+}
+.sticky-note-view-value {
+  font-size: 1.05rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #333;
+  min-height: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.sticky-note-view-value-title {
+  padding: 0.4rem 0.7rem;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #333;
+  min-height: 1.5rem;
+  max-width: fit-content;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: bold
+}
+
+.sticky-note-attachments-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.sticky-note-attachments-placeholder {
+  font-size: 1.05rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 7px;
+  border: 1.2px solid #e0e0e0;
+  background: #f9f9f9;
+  color: #999;
+  font-style: italic;
+  min-height: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.sticky-note-attachment-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+.sticky-note-attachment-btn:hover {
+  background: #444;
+}
+
+.sticky-note-view-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+.sticky-note-view-row .sticky-note-view-field {
+  flex: 1;
+  margin-bottom: 0;
 }

@@ -20,13 +20,15 @@ function App() {
   return (
     <div>
       <div className="App">
+        <div className="app-header">
+          <h1 className="app-title">Task Man-ager</h1>
+          <p className="app-subtitle">made by dylan chipun</p>
+        </div>
         <Todos />
       </div>
     </div>
     
   )
 }
-
-
 
 export default App
